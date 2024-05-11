@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -36,8 +36,30 @@ function Form({name, setName, details, setDetails, setShowDetailsAnimation}) {
           const gender = await genderResp.json()
           var updatedName = named?.name || name
           if(named?.error){
-            toast('Request limit reached')
+            toast('Request limit reached',{
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+              })
             setError(true)
+          }else{
+            toast('Data Fetched Successfully', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+              })
           }
           // console.log(details, { name: updatedName, age: age.age, gender: gender.gender });
           setDetails({ name: updatedName, age: age.age, gender: gender.gender });
